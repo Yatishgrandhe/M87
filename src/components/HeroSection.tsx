@@ -5,7 +5,7 @@ import { createWebGLVideoRenderer } from '@/lib/webglVideoRenderer';
 
 const HERO = {
   designation: 'M87*',
-  subtitle: '55 million light years',
+  subtitle: '55 million light-years · Messier 87',
   headlineTop: 'Into the',
   headlineBottom: 'Singularity',
 };

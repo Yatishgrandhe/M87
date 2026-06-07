@@ -2,7 +2,7 @@ import type { PhotoTopic } from '@/lib/unsplash';
 
 export const SITE_BRAND = {
   name: 'Singularity',
-  displayName: 'SINGULARITY',
+  displayName: 'Singularity',
   tagline: 'Event Horizon Archive',
 } as const;
 
@@ -65,7 +65,7 @@ export const CARDS: CardData[] = [
     accent: true,
     href: '/physics',
     imageTopic: 'singularity',
-    body: `A region where gravity is so extreme that nothing — not light — escapes past the event horizon. They form from collapsing massive stars and grow to billions of solar masses at galaxy centers.`,
+    body: `A region where gravity is so extreme that nothing — not even light — can escape once inside the event horizon. Stellar-mass holes form when massive stars collapse; supermassive ones reach billions of solar masses at galaxy centers.`,
   },
   {
     id: 'event-horizon',
@@ -137,12 +137,12 @@ export const CARDS: CardData[] = [
 ];
 
 export const STATS: StatData[] = [
-  { label: 'SOLAR MASSES', value: 6.5, suffix: ' Billion', unit: 'M87* Black Hole Mass', decimals: 1 },
-  { label: 'LIGHT YEARS', value: 26000, suffix: '', unit: 'Distance to Sgr A*' },
-  { label: 'KM / SECOND', value: 299792, suffix: '', unit: 'Escape Velocity at Horizon' },
-  { label: 'SOLAR MASSES', value: 4, suffix: ' Million', unit: 'Milky Way Central Black Hole' },
+  { label: 'SOLAR MASSES', value: 6.5, suffix: ' Billion', unit: 'M87* Mass (EHT Collaboration)', decimals: 1 },
+  { label: 'LIGHT YEARS', value: 27000, suffix: '', unit: 'Distance to Sgr A* (GRAVITY)' },
+  { label: 'μAS', value: 42, suffix: '', unit: 'M87* Shadow Angular Diameter (EHT)' },
+  { label: 'SOLAR MASSES', value: 4.1, suffix: ' Million', unit: 'Sgr A* Mass (GRAVITY)', decimals: 1 },
+  { label: 'LIGHT YEARS', value: 55, suffix: ' Million', unit: 'Distance to M87* (EHT)' },
   { label: 'YEAR', value: 1974, suffix: '', unit: 'Hawking Radiation Proposed' },
-  { label: 'KNOWN OBJECTS', value: 10000, suffix: '+', unit: 'Black Holes Catalogued' },
 ];
 
 export const TIMELINE: TimelineEvent[] = [
@@ -152,9 +152,9 @@ export const TIMELINE: TimelineEvent[] = [
   { year: '1939', title: 'Oppenheimer Predicts Collapse', desc: 'J. Robert Oppenheimer & Hartland Snyder show massive stars must collapse to a point.' },
   { year: '1967', title: '"Black Hole" Coined', desc: 'John Wheeler popularizes the term at a New York lecture.' },
   { year: '1974', title: 'Hawking Radiation', desc: 'Stephen Hawking predicts quantum effects cause black holes to emit thermal radiation and slowly evaporate.' },
-  { year: '2015', title: 'Gravitational Waves Detected', desc: 'LIGO hears two black holes merge 1.3 billion light years away.' },
-  { year: '2019', title: 'M87* Photographed', desc: "Event Horizon Telescope releases the first direct image of a black hole's shadow and photon ring." },
-  { year: '2022', title: 'Sgr A* Photographed', desc: "Our galaxy's central black hole imaged for the first time." },
+  { year: '2015', title: 'Gravitational Waves Detected', desc: 'LIGO detects GW150914 — the first direct signal from a binary black hole merger roughly 1 billion light-years away.' },
+  { year: '2019', title: 'M87* Photographed', desc: "The Event Horizon Telescope publishes the first direct image of a black hole — M87*'s shadow and photon ring." },
+  { year: '2022', title: 'Sgr A* Photographed', desc: "EHT releases the first image of Sagittarius A*, the 4.1-million-solar-mass black hole at the Milky Way's center." },
 ];
 
 export const SUBPAGES: SubpageData[] = [
@@ -215,7 +215,7 @@ export const SUBPAGES: SubpageData[] = [
       },
       {
         heading: 'Supermassive Black Holes (10⁶–10¹⁰ M☉)',
-        body: `Found at the center of nearly every large galaxy. Sagittarius A* at the Milky Way's core weighs 4 million solar masses. M87* weighs 6.5 billion. How they formed and grew so large so early in cosmic history remains one of astrophysics' great puzzles.`,
+        body: `Found at the center of nearly every large galaxy. Sagittarius A* at the Milky Way's core weighs about 4.1 million solar masses. M87* weighs 6.5 billion. How they formed and grew so large so early in cosmic history remains one of astrophysics' great puzzles.`,
       },
       {
         heading: 'Primordial Black Holes (Theoretical)',

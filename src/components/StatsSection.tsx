@@ -60,8 +60,8 @@ export default function StatsSection() {
           <p className="stats-section__eyebrow">Quantified Extremes</p>
           <h2 id="stats-heading">Physics at the Limit</h2>
           <p>
-            Black holes turn familiar quantities into impossible scales: light-speed escape
-            velocities, galaxy-scale mass, and time stretched to the edge of observation.
+            Verified figures from the Event Horizon Telescope and GRAVITY collaborations —
+            from microarcsecond shadows to billion-solar-mass engines across cosmic distances.
           </p>
         </div>
 
@@ -116,18 +116,18 @@ export default function StatsSection() {
         .stats-section h2 {
           margin-top: 0.85rem;
           color: var(--text-primary);
-          font-family: var(--font-display);
-          font-size: clamp(2.1rem, 5vw, 4.4rem);
+          font-family: var(--font-display), system-ui, sans-serif;
+          font-size: clamp(2rem, 4.5vw, 3.75rem);
           font-weight: 700;
-          letter-spacing: -0.045em;
+          letter-spacing: -0.03em;
           line-height: 1;
         }
 
         .stats-section__header p:last-child {
           margin-top: 1.15rem;
           color: var(--text-muted);
-          font-family: var(--font-body);
-          font-size: 0.95rem;
+          font-family: var(--font-body), Georgia, serif;
+          font-size: 1.05rem;
           line-height: 1.8;
         }
 

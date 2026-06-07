@@ -12,7 +12,7 @@ const config: Config = {
         display: ['var(--font-display)'],
         body: ['var(--font-body)'],
         ui: ['var(--font-ui)'],
-        mono: ['var(--font-body)'],
+        mono: ['var(--font-mono)'],
       },
       transitionDuration: {
         '400': '400ms',

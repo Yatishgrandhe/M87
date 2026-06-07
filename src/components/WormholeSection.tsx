@@ -98,19 +98,19 @@ export default function WormholeSection() {
         .wormhole-section h2 {
           margin-top: 0.9rem;
           color: var(--text-primary);
-          font-family: var(--font-display);
-          font-size: clamp(2.3rem, 6vw, 5.4rem);
+          font-family: var(--font-display), system-ui, sans-serif;
+          font-size: clamp(2rem, 5vw, 4rem);
           font-weight: 700;
-          letter-spacing: -0.06em;
-          line-height: 0.95;
+          letter-spacing: -0.03em;
+          line-height: 0.98;
         }
 
         .wormhole-section__content > p:last-of-type {
           margin: 1.35rem auto 0;
           max-width: 620px;
           color: var(--text-muted);
-          font-family: var(--font-body);
-          font-size: 0.98rem;
+          font-family: var(--font-body), Georgia, serif;
+          font-size: 1.05rem;
           line-height: 1.85;
         }
 
