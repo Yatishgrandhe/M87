@@ -224,11 +224,16 @@ a {
   overflow: hidden;
 }
 
+.hero-section__video {
+  display: none;
+}
+
 .hero-section__canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  background: #030304 url('/hero-poster.webp') center / cover no-repeat;
 }
 
 .hero-section__glow {

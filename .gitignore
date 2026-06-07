@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Source PNG sequences — encoded to hero.webm / hero.mp4 for production
+/public/frames/[0-9][0-9].png
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

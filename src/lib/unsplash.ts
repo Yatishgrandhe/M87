@@ -116,8 +116,8 @@ export const CURATED_PHOTOS: Record<PhotoTopic, UnsplashPhoto> = {
 /** Guaranteed fallback if any image fails to load. */
 export const FALLBACK_PHOTO = CURATED_PHOTOS.galaxy;
 
-export function getPhotoUrl(photo: UnsplashPhoto, width = 1200) {
-  return `${photo.url}?auto=format&fit=crop&w=${width}&q=80&ixlib=rb-4.0.3`;
+export function getPhotoUrl(photo: UnsplashPhoto, width = 900) {
+  return `${photo.url}?auto=format&fit=crop&w=${width}&q=75&ixlib=rb-4.0.3`;
 }
 
 export function getPhoto(topic: PhotoTopic) {

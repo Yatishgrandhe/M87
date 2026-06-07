@@ -1,13 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import {
-  FRAME_COUNT,
-  getDrawableFrame,
-  HERO_SEQUENCE_DURATION_MS,
-  waitForFirstFrame,
-} from '@/lib/frameLoader';
-import { usePlayOnceFrame } from '@/hooks/usePlayOnceFrame';
+import { useEffect, useRef } from 'react';
+import { createWebGLVideoRenderer } from '@/lib/webglVideoRenderer';
 
 const HERO = {
   designation: 'M87*',
@@ -16,99 +10,87 @@ const HERO = {
   headlineBottom: 'Singularity',
 };
 
-function drawCoverFit(
-  ctx: CanvasRenderingContext2D,
-  img: HTMLImageElement,
-  canvas: HTMLCanvasElement
-) {
-  const canvasWidth = canvas.width;
-  const canvasHeight = canvas.height;
-  const imageWidth = img.naturalWidth;
-  const imageHeight = img.naturalHeight;
-
-  if (imageWidth <= 0 || imageHeight <= 0) return;
-
-  const scale = Math.max(canvasWidth / imageWidth, canvasHeight / imageHeight);
-  const width = imageWidth * scale;
-  const height = imageHeight * scale;
-  const x = (canvasWidth - width) / 2;
-  const y = (canvasHeight - height) / 2;
-
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  ctx.drawImage(img, x, y, width, height);
-}
+const HERO_VIDEO_WEBM = '/hero.webm';
+const HERO_VIDEO_MP4 = '/hero.mp4';
+const HERO_POSTER = '/hero-poster.webp';
 
 export default function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [canAnimate, setCanAnimate] = useState(false);
-  const frameIndexRef = usePlayOnceFrame(
-    FRAME_COUNT,
-    HERO_SEQUENCE_DURATION_MS,
-    canAnimate
-  );
-
-  useEffect(() => {
-    let cancelled = false;
-
-    waitForFirstFrame().then(() => {
-      if (!cancelled) {
-        setCanAnimate(true);
-      }
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const video = videoRef.current;
+    if (!canvas || !video) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
 
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
+    if (prefersReducedMotion) {
+      return;
+    }
 
-    const resizeCanvas = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const width = Math.floor(window.innerWidth * dpr);
-      const height = Math.floor(window.innerHeight * dpr);
+    const renderer = createWebGLVideoRenderer(canvas);
+    if (!renderer) return;
 
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
-    };
-
-    let lastDrawnKey = '';
     let animationFrameId = 0;
+    let started = false;
 
     const paint = () => {
-      resizeCanvas();
-
-      const frameIndex = frameIndexRef.current;
-      const frame = getDrawableFrame(frameIndex);
-      const drawKey = frame ? `${frameIndex}:${frame.src}` : '';
-
-      if (frame && drawKey !== lastDrawnKey) {
-        drawCoverFit(ctx, frame, canvas);
-        lastDrawnKey = drawKey;
+      if (video.readyState >= 2) {
+        renderer.draw(video);
       }
 
-      animationFrameId = window.requestAnimationFrame(paint);
+      if (!video.paused && !video.ended) {
+        animationFrameId = window.requestAnimationFrame(paint);
+      }
     };
 
-    resizeCanvas();
-    animationFrameId = window.requestAnimationFrame(paint);
-    window.addEventListener('resize', resizeCanvas);
+    const startPlayback = () => {
+      if (started) return;
+      started = true;
+
+      video.currentTime = 0;
+      void video.play().then(() => {
+        animationFrameId = window.requestAnimationFrame(paint);
+      });
+    };
+
+    const onLoaded = () => {
+      renderer.draw(video);
+      startPlayback();
+    };
+
+    const onEnded = () => {
+      renderer.draw(video);
+      window.cancelAnimationFrame(animationFrameId);
+    };
+
+    const onResize = () => {
+      renderer.resize();
+      if (video.readyState >= 2) {
+        renderer.draw(video);
+      }
+    };
+
+    video.addEventListener('loadeddata', onLoaded);
+    video.addEventListener('ended', onEnded);
+    window.addEventListener('resize', onResize);
+
+    if (video.readyState >= 2) {
+      onLoaded();
+    }
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', resizeCanvas);
+      video.removeEventListener('loadeddata', onLoaded);
+      video.removeEventListener('ended', onEnded);
+      window.removeEventListener('resize', onResize);
+      video.pause();
+      renderer.destroy();
     };
-  }, [frameIndexRef]);
+  }, []);
 
   return (
     <section
@@ -117,6 +99,19 @@ export default function HeroSection() {
       aria-label="Black hole intro animation"
     >
       <div className="hero-section__stage">
+        <video
+          ref={videoRef}
+          className="hero-section__video"
+          muted
+          playsInline
+          preload="auto"
+          poster={HERO_POSTER}
+          aria-hidden="true"
+        >
+          <source src={HERO_VIDEO_WEBM} type="video/webm" />
+          <source src={HERO_VIDEO_MP4} type="video/mp4" />
+        </video>
+
         <canvas
           ref={canvasRef}
           className="hero-section__canvas"

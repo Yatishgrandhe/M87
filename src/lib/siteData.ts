@@ -98,7 +98,7 @@ export const CARDS: CardData[] = [
     accent: true,
     href: '/physics#accretion',
     imageTopic: 'accretion',
-    imageSrc: '/frames/25.png',
+    imageSrc: '/accretion-thumb.webp',
     imageAlt: 'Glowing accretion disk around a black hole event horizon',
     body: `Infalling matter spirals into a superheated plasma disk, glowing in X-rays. The M87* photon ring is light bent around the hole, not the disk itself.`,
   },

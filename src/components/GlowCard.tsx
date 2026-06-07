@@ -53,7 +53,7 @@ export default function GlowCard({
         ) : (
           <UnsplashImage
             photo={photo}
-            width={featured ? 1400 : 800}
+            width={featured ? 1100 : 640}
             priority={featured}
             className="glow-card-v2__img"
           />

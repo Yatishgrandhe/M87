@@ -28,9 +28,10 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/frames/01.png"
+          href="/hero-poster.webp"
           fetchPriority="high"
         />
+        <link rel="preload" as="video" href="/hero.webm" type="video/webm" />
       </head>
       <body className="min-h-screen bg-[var(--bg-void)] text-[var(--text-primary)] antialiased">{children}</body>
     </html>
